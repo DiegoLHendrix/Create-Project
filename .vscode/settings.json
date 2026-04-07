@@ -1,0 +1,33 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "actionButtons": {
+        "defaultColor": "white",
+        "reloadButton": "↻",
+        "loadNpmCommands": false,
+        "commands": [
+            {
+                "cwd": "${workspaceFolder}/createproject",
+                "tooltip": "Migrate Database",
+                "name": "$(tools) Migrate Database",
+                "color": "white",
+                "singleInstance": false,
+                "command": "python manage.py makemigrations && python manage.py migrate"
+            },
+            {
+                "cwd": "${workspaceFolder}/createproject",
+                "tooltip": "Run Django Server",
+                "name": "$(play) Run Django",
+                "color": "white",
+                "singleInstance": false,
+                "command": "python manage.py runserver"
+            }
+        ]
+    }
+}

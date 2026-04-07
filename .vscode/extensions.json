@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "seunlanlege.action-buttons",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one",
+    "ms-python.python",
+    "ms-python.pylance",
+    "esbenp.prettier-vscode",
+    "alexcvzz.vscode-sqlite"
+  ]
+}
