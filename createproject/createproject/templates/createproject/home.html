@@ -1,0 +1,125 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %}Home Page{% endblock %} 
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1>Welcome to my Website!</h1>
+        <!-- <p>Explore our features through the slider below.</p> -->
+    </div>
+
+    <div id="featureCarousel" class="carousel slide shadow rounded bg-light" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            {% for feature in features %}
+            <button type="button" data-bs-target="#featureCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-inner">
+            {% for feature in features %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="d-md-flex align-items-center p-5">
+                    <div class="col-md-6">
+                        <img src="{% static 'images/' %}{{ feature.image }}" class="img-fluid rounded mx-auto d-block" style="max-height: 400px; object-fit: cover" alt="{{ feature.title }}" />
+                    </div>
+                    <div class="col-md-6 p-4 text-dark">
+                        <h2 class="fw-bold">{{ feature.title }}</h2>
+                        <p class="lead">{{ feature.description }}</p>
+                        <!-- <a href="{{ feature.link }}" class="btn btn-primary">Learn More</a> -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#featureCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featureCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+
+<div class="container my-5 pt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold border-bottom pb-3">Latest Projects</h2>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for project in projects %}
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm project-card">
+                <div class="position-relative overflow-hidden rounded">
+                    <img src="{% static 'images/' %}{{ project.image }}" 
+                         class="card-img-top" 
+                         alt="{{ project.title }}"
+                         style="height: 250px; object-fit: cover;">
+                </div>
+                
+                <div class="card-body text-center">
+                    <span class="badge bg-secondary mb-2">{{ project.tag }}</span>
+                    <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                    
+                    <div class="project-description">
+                        <hr>
+                        <p class="card-text text-muted small">{{ project.description }}</p>
+                        <!-- <a href="#" class="stretched-link text-decoration-none text-primary fw-bold">View Project</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Carousel Adjustments */
+    .carousel-item { min-height: 60vh; }
+    .carousel-control-prev-icon, .carousel-control-next-icon { padding: 1.2rem; background-size: 50%; }
+    .carousel-indicators [data-bs-target] { background-color: #000; }
+
+    /* Project Card Hover Effects */
+    .project-card {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    /* 1. Increase size on hover */
+    .project-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+        z-index: 10;
+    }
+
+    /* 2. Hide description initially */
+    .project-description {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    }
+
+    /* 3. Show description on hover */
+    .project-card:hover .project-description {
+        max-height: 200px; /* Large enough to fit text */
+        opacity: 1;
+        margin-top: 10px;
+    }
+
+    /* Image zoom effect */
+    .project-card img {
+        height: 250px; 
+        object-fit: contain; /* Changed from cover to contain */
+        background-color: #f8f9fa; /* Optional: adds a light grey background to empty space */
+    }
+    .project-card:hover img {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
